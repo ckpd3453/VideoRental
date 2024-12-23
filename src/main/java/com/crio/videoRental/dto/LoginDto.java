@@ -1,0 +1,48 @@
+package com.crio.videoRental.dto;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import org.springframework.stereotype.Component;
+
+@Component
+public class LoginDto {
+
+    @NotEmpty(message = "Email must not be empty")
+    @Email(message = "Email should be valid")
+    private String email;
+
+    @NotEmpty(message = "Password must not be empty")
+    @Size(min = 6, message = "Password must be at least 6 characters long")
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$", message = "Password must contain at least one uppercase letter, one lowercase letter, and one number")
+    private String password;
+
+    @NotEmpty(message = "Role must not be empty")
+    @Pattern(regexp = "^(CUSTOMER|ADMIN)$", message = "Role must be either 'customer' or 'admin'")
+    private String role;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+}
